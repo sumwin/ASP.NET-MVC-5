@@ -222,6 +222,22 @@
     <Compile Include="Migrations\201810051530339_ApplyAnnotationsToCustomerName.Designer.cs">
       <DependentUpon>201810051530339_ApplyAnnotationsToCustomerName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810060534213_ApplyNametoMembershipType.cs" />
+    <Compile Include="Migrations\201810060534213_ApplyNametoMembershipType.Designer.cs">
+      <DependentUpon>201810060534213_ApplyNametoMembershipType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810060553152_ApplyMembershipTypeWithData.cs" />
+    <Compile Include="Migrations\201810060553152_ApplyMembershipTypeWithData.Designer.cs">
+      <DependentUpon>201810060553152_ApplyMembershipTypeWithData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810060555434_RemoveMemberShipData.cs" />
+    <Compile Include="Migrations\201810060555434_RemoveMemberShipData.Designer.cs">
+      <DependentUpon>201810060555434_RemoveMemberShipData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810060605303_AddBirthdateToCustomer.cs" />
+    <Compile Include="Migrations\201810060605303_AddBirthdateToCustomer.Designer.cs">
+      <DependentUpon>201810060605303_AddBirthdateToCustomer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -329,6 +345,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810051530339_ApplyAnnotationsToCustomerName.resx">
       <DependentUpon>201810051530339_ApplyAnnotationsToCustomerName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810060534213_ApplyNametoMembershipType.resx">
+      <DependentUpon>201810060534213_ApplyNametoMembershipType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810060553152_ApplyMembershipTypeWithData.resx">
+      <DependentUpon>201810060553152_ApplyMembershipTypeWithData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810060555434_RemoveMemberShipData.resx">
+      <DependentUpon>201810060555434_RemoveMemberShipData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810060605303_AddBirthdateToCustomer.resx">
+      <DependentUpon>201810060605303_AddBirthdateToCustomer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
