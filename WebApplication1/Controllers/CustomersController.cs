@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using WebApplication1.Models;
 using System.Data.Entity;
@@ -40,8 +37,7 @@ namespace WebApplication1.Controllers
             else
             {
                 var customerinDb = _context.Customers.Single(c => c.Id == customer.Id);
-
-               
+                               
                 customerinDb.Name = customer.Name;
                 customerinDb.Birthdate = customer.Birthdate;
                 customerinDb.MembershipTypeId = customer.MembershipTypeId;
