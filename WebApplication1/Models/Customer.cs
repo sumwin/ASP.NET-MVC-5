@@ -10,7 +10,7 @@ namespace WebApplication1.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "please enter customer's name.")]
         [StringLength(255)]
         public string Name { get; set; }
 
@@ -22,6 +22,7 @@ namespace WebApplication1.Models
         public byte MembershipTypeId { get; set; }
 
         [Display(Name ="Date of Birth")]
+        [Min18YearsIfAMember]
         public DateTime? Birthdate { get; set; }
 
     }
