@@ -18,11 +18,13 @@ namespace WebApplication1.Dtos
         [Required]
         public byte GenreId { get; set; }
 
+        public GenreTypeDto Genre { get; set; }
+
 
         public DateTime DateAdded { get; set; }
 
         
-        [Required]
+        
         public DateTime ReleaseDate { get; set; }
 
                 

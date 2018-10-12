@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Web.Http;
 using WebApplication1.Dtos;
 using WebApplication1.Models;
+using System.Data.Entity;
 
 namespace WebApplication1.Controllers.Api
 {
@@ -19,12 +20,20 @@ namespace WebApplication1.Controllers.Api
             _context = new ApplicationDbContext();
         }
 
-        public IEnumerable<MovieDto> GetMovies()
-        {
-            return _context.Movies.ToList().Select(Mapper.Map<Movie, MovieDto>);
-        }
+        //public IEnumerable<MovieDto> GetMovies()
+        //{
+        //    return _context.Movies.ToList().Select(Mapper.Map<Movie, MovieDto>);
+        //}
 
         //GET /api/Movies/1
+        public IHttpActionResult GetMovies()
+        {
+            var movieDtos = _context.Movies
+                .Include(m => m.Genre)
+                .ToList()
+                .Select(Mapper.Map<Movie, MovieDto>);
+            return Ok(movieDtos);
+        }
         public IHttpActionResult GetMovie(int id)
         {
             var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
@@ -51,10 +60,10 @@ namespace WebApplication1.Controllers.Api
             return Created(new Uri(Request.RequestUri + "/" + movie.Id), movieDto);
         }
 
-        
+
         //PUT /api/Movies/1
         [HttpPut]
-        public void UpdateMovie(int id, MovieDto movieDto)
+        public IHttpActionResult UpdateMovie(int id, MovieDto movieDto)
         {
             if (!ModelState.IsValid)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
@@ -68,12 +77,14 @@ namespace WebApplication1.Controllers.Api
 
             _context.SaveChanges();
 
+            return Ok();
+
         }
 
 
         //DELETE /api/movies/1
         [HttpDelete]
-        public void DeleteMovie(int id)
+        public IHttpActionResult DeleteMovie(int id)
         {
             if (!ModelState.IsValid)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
@@ -85,6 +96,8 @@ namespace WebApplication1.Controllers.Api
 
             _context.Movies.Remove(movieInDb);
             _context.SaveChanges();
+
+            return Ok();
         }
     }
 }

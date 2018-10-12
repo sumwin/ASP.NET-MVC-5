@@ -1,4 +1,14 @@
 ﻿@model IEnumerable<WebApplication1.Models.Customer>
+@*
+    Note: I've set the model for this view to IEnumerable<Customer>.
+    This is a simple interface implemented by the list class. Since
+    in this view we only want to iterate over this list, and we don't
+    need any of the operations in the List class (eg Add, Remove, etc),
+    it's better to use the IEnumerable interface, which allows use to
+    iterate over the list. If in the future, we replace the List with a
+    different data structure, as long as it is enumerable, our view code
+    will remain unchanged.
+*@
 @{
     ViewBag.Title = "Customers";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,6 +18,7 @@
 <p>
     @Html.ActionLink("New Customer", "New", "Customers", null, new { @class = "btn btn-primary" })
 </p>
+
 <table id="customers" class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -33,20 +44,12 @@
             }*@
     </tbody>
 </table>
-@*@if (!Model.Any())
-    {
-        <p>We don't have any customers yet.</p>
-    }
-    else
-    {
-
-    }*@
 
 @section scripts
 {
     <script>
         $(document).ready(function () {
-            $("#customers").DataTable({
+            var table = $("#customers").DataTable({
                 ajax: {
                     url: "api/customers",
                     dataSrc: ""
@@ -55,11 +58,11 @@
                     {
                         data: "name",
                         render: function (data, type, customer) {
-                            return "<a href='/customers/edit/" + customer.id + "'>" + customer.name + "</a>"
+                            return "<a href='/customers/edit/" + customer.id + "'>" + customer.name + "</a>";
                         }
                     },
                     {
-                        data: "name"
+                        data: "membershipType.name"
                     },
                     {
                         data: "id",
@@ -73,13 +76,15 @@
 
             $("#customers").on("click", ".js-delete", function () {
                 var button = $(this);
-                bootbox.confirm("Are you asure want to delete this customer?", function (result) {
+
+                bootbox.confirm("Are you sure want to delete this customer?", function (result) {
                     if (result) {
                         $.ajax({
-                            url: "/api/customers/" + $(this).attr("data-customer-id"),
+                            url: "/api/customers/" + button.attr("data-customer-id"),
                             method: "DELETE",
                             success: function () {
-                                button.parents("tr").remove();
+                                table.row(button.parents("tr")).remove().draw();
+
                             }
                         });
 
